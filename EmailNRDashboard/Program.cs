@@ -24,12 +24,7 @@ namespace EmailNRDashboard
 
         private static void Main()
         {
-            //_currentDirectory = Path.GetTempPath();
-
-            //Error Simulation
-            //_rptTitle = "GPI Website Metrics from " + DateTime.Now.AddDays(-14).ToString(CultureInfo.InvariantCulture) + " to " + DateTime.Now.ToString(); 
-
-            _rptTitle = "GPI Website Metrics from " + DateTime.Now.AddDays(-14).ToString("MMM dd, yyyy") + " to " + DateTime.Now.ToString("MMM dd, yyyy");
+            _rptTitle = "GPI Website Metrics from " + DateTime.Now.AddDays(-30).ToString("MMM dd, yyyy") + " to " + DateTime.Now.ToString("MMM dd, yyyy");
             _currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             _processLog = _rptTitle + "<br/><br/>\n\n";
             _processLog += _currentDirectory+ "<br/><br/>\n\nDeleting old pdf files (if any)<br/><br/>\n\n";
@@ -272,7 +267,6 @@ namespace EmailNRDashboard
                     break;
                 }
             }
-
             try
             {
                 client.Send(mail);
