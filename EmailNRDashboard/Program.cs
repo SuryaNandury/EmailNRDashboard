@@ -265,7 +265,7 @@ namespace EmailNRDashboard
                         mail.Bcc.Add(item);
                     }
                     mail.Subject = _rptTitle;
-                    const string body = "<div style=\"font-family:Calibri; font-size:14px;\"> <p> Hello,</p> <p>Please find attached the metrics of GPI Public Website for the period of {0} to {1}.<br />Please don't hesitate to reach out to me in case of any queries.</p> <p> Thanks<br /> Julie </p> </div>";
+                    const string body = "<div style=\"font-family:Calibri; font-size:14px;\"> <p> Hello,</p> <p>Please find attached the metrics of GPI Public Website for the period of {0} to {1}.<br />Please don't hesitate to reach out to me in case of any queries.</p> <p> Thanks,<br /> Julie </p> </div>";
                     mail.Body = string.Format(body, _from, _to);
                     mail.Attachments.Add(new Attachment(_currentDirectory + _rptTitle + ".pdf"));
                     break;
