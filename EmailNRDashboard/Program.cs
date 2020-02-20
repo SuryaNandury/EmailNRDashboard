@@ -21,10 +21,14 @@ namespace EmailNRDashboard
         private static WebDriverWait _wait;
         private static string _currentDirectory;
         private static string _rptTitle;
+        private static string _from;
+        private static string _to;
 
         private static void Main()
         {
-            _rptTitle = "GPI Website Metrics from " + DateTime.Now.AddDays(-30).ToString("MMM dd, yyyy") + " to " + DateTime.Now.ToString("MMM dd, yyyy");
+            _from = DateTime.Now.AddDays(-30).ToString("MMM dd, yyyy");
+            _to = DateTime.Now.ToString("MMM dd, yyyy");
+            _rptTitle = "GPI Public Website metrics from " + _from + " to " + _to;
             _currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             _processLog = _rptTitle + "<br/><br/>\n\n";
             _processLog += _currentDirectory+ "<br/><br/>\n\nDeleting old pdf files (if any)<br/><br/>\n\n";
@@ -212,7 +216,7 @@ namespace EmailNRDashboard
         {
             MailMessage mail = new MailMessage();
             SmtpClient client = new SmtpClient("gpimail.na.graphicpkg.pri");
-            mail.From = new MailAddress("DoNotReply@GraphicPkg.com");
+            mail.From = new MailAddress("Julie.Metalia@graphicpkg.com");
             mail.IsBodyHtml = true;
             if (!ConfigurationManager.AppSettings.AllKeys.Contains("ToAddresses"))
             {
@@ -261,8 +265,8 @@ namespace EmailNRDashboard
                         mail.Bcc.Add(item);
                     }
                     mail.Subject = _rptTitle;
-                    const string body = "<div style=\"font-family:Calibri; font-size:14px;\"> <p> Greetings!! </p> <p> Attached, is a report on {0}.<br /> For any questions regarding the attached report, please write to <a href=\"mailto:DLIST_Public_Web@graphicpkg.com\">DLIST_Public_Web</a> </p> <p> Regards<br /> GPI Website Support Team </p> <p style=\"color:#686868;\"> ****This is an automated email notification. Do not respond to this message.****</p> </div>";
-                    mail.Body = string.Format(body, _rptTitle);
+                    const string body = "<div style=\"font-family:Calibri; font-size:14px;\"> <p> Hello,</p> <p>Please find attached the metrics of GPI Public Website for the period of {0} to {1}.<br />Please don't hesitate to reach out to me in case of any queries.</p> <p> Thanks<br /> Julie </p> </div>";
+                    mail.Body = string.Format(body, _from, _to);
                     mail.Attachments.Add(new Attachment(_currentDirectory + _rptTitle + ".pdf"));
                     break;
                 }
